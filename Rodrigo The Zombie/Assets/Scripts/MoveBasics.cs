@@ -10,7 +10,7 @@ public class MoveBasics : MonoBehaviour
     private Rigidbody2D rig;
     private Animator anim;
     public bool Nochao;
-    public bool Jumping;
+    public bool Jumping = false;
     
     // Start is called before the first frame update
     void Start()
@@ -41,26 +41,41 @@ public class MoveBasics : MonoBehaviour
             if (input > 0)
             {
                 transform.eulerAngles = new Vector2(0f, 0f);
-                anim.SetBool("Walk", true);
+                //anim.SetBool("Walk", true);
             }
             else if (input < 0)
             {
                 transform.eulerAngles = new Vector2(180f, 0f);
+                //anim.SetBool("Walk", true);
             }
-            else if (Input.GetKey(KeyCode.F) && Jumping == false)
+            else
             {
-                anim.SetBool("Walk", true);
+                //anim.SetBool("Walk", true);  
+            }
+            
+            if (Input.GetKey(KeyCode.F) && Jumping == false)
+            {
+                //anim.SetBool("Attack", true);
+            }
+            else
+            {
+                //anim.SetBool("Attack", false);
             }
             
         }
         
-        if (Input.GetButtonDown("Jump") && Nochao && !Jumping)
+        if (Input.GetButtonDown("Jump") && Nochao && Jumping == false)
         {
             rig.AddForce(Vector2.up * Forca, ForceMode2D.Impulse);
             Nochao = false;
             Jumping = true; 
-            anim.SetBool("Jump", true);
+            //anim.SetBool("Jump", true);
         }
+        else
+        {
+            Jumping = false;
+        }
+        
         
     }
 }
